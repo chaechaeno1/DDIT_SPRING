@@ -15,7 +15,14 @@ import kr.or.ddit.book.service.IBookService;
 
 /*
  * @Controller 어노테이션이 있는 클래스는 스프링이 브라우저의 요청(request)을 받아들이는 컨트롤러라고 인지해서
- * 자바 빈(Java Bean)으로 등록해서 관리한다.
+ * 자바 빈(Java Bean)으로 등록해서 관리한다. 
+ * 
+ * +) 자바 빈 이란?
+ * - 특정한 정보 (id, password, name, job...)등을 가지고 있는 클래스를 표현하는 하나의 규칙이고, 
+ * 	 데이터를 표현하기 위한 목적을 지니고 있음. 이 규칙을 지닌 클래스를 Java Bean 이라고 함.
+ * 
+ * 
+ * 
  */
 
 @Controller
@@ -25,7 +32,7 @@ public class BookInsertController {
 	//service
 	//껍데기이면서 주소만 제공
 	//실제로 구성품이 들어있는건 class(bookserviceimpl)
-	//private IBookService service = new BookServiceImpl();
+	//private IBookService service = new BookServiceImpl();-> 하지만 이렇게 표현하지않을 것..
 	
 	// DI : 의존성 주입
 	// BookServiceImple에 @Service 어노테이션 추가해주면
@@ -66,8 +73,8 @@ public class BookInsertController {
 	 */
 	
 
-	//bookForm() 메서드는 '/book/form.do'를 받는 최종 목적지
-	//이때, return으로 나가는 정보가 'book/form'이라는 페이지 정보를 리턴
+	//bookForm() 메서드는 '/book/form.do'를 받는 최종 목적지 -> 이건 url 주소이고
+	//이때, return으로 나가는 정보가 'book/form'이라는 페이지 정보를 리턴 -> 이건 jsp 페이지
 	//문자열로 이뤄진 페이지 정보이기 때문에 리턴 타입을 String으로 설정
 	//페이지 정보를 리턴하는 방법은 여러가지가 존재한다.
 	// - 문자열 그대로를 리턴하는 String, 문자열을 리턴타입으로 설정
@@ -79,12 +86,10 @@ public class BookInsertController {
 	//value="/form.do", method=RequestMethod.GET로 표현
 	
 
-	
-	
-	@RequestMapping(value="/form.do", method=RequestMethod.GET)
+	@RequestMapping(value="/form.do", method=RequestMethod.GET) //uri 페이지!!!
 	public ModelAndView bookForm() {		
 		return new ModelAndView("book/form"); //forward 형식으로 페이지를 불러오는 것
-		///WEB-INF/views/ book/form .jsp
+		///WEB-INF/views/ + "book/form" +  .jsp
 		
 	}
 	
@@ -96,7 +101,7 @@ public class BookInsertController {
 	 */
 	
 	
-	@RequestMapping(value="/form.do", method = RequestMethod.POST)
+	@RequestMapping(value="/form.do", method = RequestMethod.POST) //데이터를 가용하므로 POST로 전송
 	public ModelAndView bookInsert(@RequestParam Map<String, Object> map) { //MAP으로 받으려면 @RequestParam 추가
 		
 		
@@ -108,6 +113,10 @@ public class BookInsertController {
 		 * 서비스에서 bookId를 리턴받는다(책 등록 후 얻어온 최신 책 ID)
 		 */
 		String bookId = service.insertBook(map); //넘겨받는 파라미터 존재
+		// service.insertBook(map)으로 받으면, 
+		// 이 메서드의 return값은 map 인스턴스에 book 테이블의 pk인 book_id 이 담기므로,
+		// 이것을 String bookId로 변수선언할 수 있는 것
+		
 		if(bookId == null) {
 			//데이터 입력이 실패할 경우 다시 데이터를 입력받아야 하므로 생성화면으로 redirect한다
 			//ModelAndView 객체는 .setViewName 메소드를 통해 뷰의 경로를 지정할 수 있다.
@@ -132,7 +141,7 @@ public class BookInsertController {
 		
 		
 		
-	}
+	} //bookInsert 메서드 끝
 	
 	
 }

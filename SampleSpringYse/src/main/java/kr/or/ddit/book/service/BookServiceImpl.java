@@ -18,6 +18,9 @@ import kr.or.ddit.book.dao.BookDAO;
 public class BookServiceImpl implements IBookService {
 	/*
 	 * Service 클래스는 비즈니스 클래스가 위치하는 곳이다.
+	 * +) '비즈니스 클래스'란? : 비즈니스 로직을 담당하고 있는 클래스
+	 * +) 비즈니스 로직은 어떤 애플리케이션에서 특정 업무나 기능을 수행하기 위한 실제 작업을 말하며, 이를 담당하는 클래스들이 비즈니스 클래스
+	 * 
 	 * 스프링 MVC 구조에서 서비스 클래스는 컨트롤러와 DAO를 연결하는 역할을 한다.
 	 * 
 	 * 어노테이션(@) Service는 스프링에 서비스 클래스임을 알려준다.

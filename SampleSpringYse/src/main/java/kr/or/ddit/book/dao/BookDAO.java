@@ -36,6 +36,7 @@ public class BookDAO {
 	 * 
 	 */
 
+	//멤버변수로 선언 -> mapper.xml 실행
 	@Inject	
 	private SqlSessionTemplate sqlSession;
 	
