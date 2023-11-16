@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Book">
+
+	<insert id="insert" parameterType="hashMap" useGeneratedKeys="true">
+		<!-- 파라미터 타입에 해당하는 프로퍼티(book_id)를 selectKey로 값을 지정해주는 것 -->
+		<selectKey keyProperty="book_id" resultType="int" order="BEFORE">
+			select seq_book.nextval from dual
+		</selectKey>
+		
+		insert into book(
+			book_id, title, category, price
+		) values (
+			#{book_id}, #{title}, #{category}, #{price}
+		)
+	
+	</insert>
+	
+
+</mapper>  
