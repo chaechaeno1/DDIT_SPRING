@@ -18,7 +18,7 @@
 		- POJO(Plain Old Java Object)란, 순수한 자바 객체를 말한다.
 		
 		그리고, 객체지향적인 원리에 충실하면서, 환경과 기술에 종속되지 않고 필요에 따라 재활용 될 수 있는 방식으로 설계된 오브젝트
-		객체지향 원리를 기반으로 설계된 오브젝트(getter/setter를 이요한 VO들)
+		객체지향 원리를 기반으로 설계된 오브젝트(getter/setter를 이용한 VO들)
 		
 		
 	namespace 항목은 쿼리가 여러 개일 때 이름 공간(namespace)을 분리하는 역할을 한다.
@@ -43,7 +43,7 @@
 		
 		mybatis는 쿼리를 실행할 때 파라미터를 치환하는데 #{title}은 파라미터로 입력된 키를 값으로 치환한다.
 		
-		
+		+) useGeneratedKeys와 KeyProperty는 일반적으로 INSERT 작업에 사용되는 옵션
 		
 		
 	 -->
