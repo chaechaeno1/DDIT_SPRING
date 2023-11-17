@@ -1,5 +1,6 @@
 package kr.or.ddit.book.web;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -39,5 +40,32 @@ public class BookRetrieveController {
 		return mav;
 		
 	}
+	
+	@RequestMapping(value="/list.do", method =RequestMethod.GET)
+	public ModelAndView list(@RequestParam Map<String, Object> map) { //검색을 위해 파라미터 map 기입
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<Map<String, Object>> list = service.selectBookList(map);
+		
+		mav.addObject("bookList",list);
+		
+		//검색 기능 추가
+		//목록 페이지에서는 keyword가 http 파라미터가 있을 수도 있고, 없을 수도 있다.
+		if(map.containsKey("keyword")) {
+			//파라미터가 있다면 뷰에 keyword 전달
+			mav.addObject("keyword", map.get("keyword"));
+		}
+		
+		mav.setViewName("book/list");
+		
+		return mav;
+		
+	}
+	
+	
+	
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 package kr.or.ddit.book.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -14,6 +15,10 @@ import kr.or.ddit.book.dao.BookDAO;
  * 스프링은 직접 클래스를 생성하는 것을 지양하고 인터페이스를 통해 접근하는 것을 권장하는 프레임워크이다.
  */
 
+/**
+ * @author PC-09
+ *
+ */
 @Service
 public class BookServiceImpl implements IBookService {
 	/*
@@ -88,6 +93,39 @@ public class BookServiceImpl implements IBookService {
 		//수정의 경우 입력과는 다르게 PK를 가져오거나 하는 절차가 필요 없으므로 행이 정상적으로 영향 받았는지만 검사하면 됨
 		int status = dao.updateBook(map);
 		return status == 1;
+	}
+
+
+
+	/**
+	 *<p> 책 삭제</p>
+	 *@since SampleSpringYse
+	 *@author ddit
+	 *@param map 책ID
+	 *@return 성공1(true), 실패 0(false)
+	 *
+	 */
+	@Override
+	public boolean removeBook(Map<String, Object> map) {
+		//삭제의 경우 수정과 동일하게 한 개의 행이 제대로 영향받았는지만 검사하면 됨
+		int status = dao.removeBook(map);
+		return status == 1; //false로 되어있었어서 그 페이지에서 나가질 못했음...
+	}
+
+
+
+	
+	/**
+	 *<p> 책 목록 </p>
+	 *@since SampleSptringYse
+	 *@author ddit
+	 *@param 현재는 없음
+	 *@return 성공 List(책), 실패 null
+	 */
+	@Override
+	public List<Map<String, Object>> selectBookList(Map<String, Object> map) {
+		
+		return dao.selectBookList(map);
 	}
 
 }

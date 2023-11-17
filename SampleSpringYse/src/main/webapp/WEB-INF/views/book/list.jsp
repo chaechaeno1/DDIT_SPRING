@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- 추가 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +19,10 @@
 				<div class="row">
 					<div class="col-md-7"></div>
 					<div class="col-md-5">
-						<form>
+						<form> <!-- 액션경로 없으면 자기자신, get방식으로 진행 -->
 							<div class="row">
 								<div class="col-md-10">
-									<input type="text" placeholder="검색" class="form-control" name="keyword" value=""/>
+									<input type="text" placeholder="검색" class="form-control" name="keyword" value="${keyword }"/>
 								</div>
 								<div class="col-md-2">
 									<input type="submit" class="btn btn-secondary" value="검색"/>
@@ -42,21 +43,37 @@
 								<th>가격</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td colspan="3">조회하실 게시글이 존재하지 않습니다.</td>
-							</tr>
 						
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
+						
+						<!-- 추가 -->
+						<c:choose>
+							<c:when test="${empty bookList}">
+								<tr>
+									<td colspan="3">조회하실 게시글이 존재하지 않습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${bookList}" var="book">
+									<tr>
+										<td>${book.TITLE}</td>
+										<td>${book.CATEGORY}</td>
+										<td>${book.PRICE}</td>
+									</tr>
+								
+								
+								</c:forEach>
+							
+							</c:otherwise>
+						</c:choose>
+						<!-- 추가 끝 -->
+						
+						<tbody>
+						
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<a href="" class="btn btn-primary">등록</a>
+			<a href="/book/form.do" class="btn btn-primary">등록</a>
 		</div>
 	</div>
 </body>

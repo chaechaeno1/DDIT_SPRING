@@ -6,6 +6,9 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
 <title>책 상세</title>
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- 추가 -->
+
 <body>
 	<div class="jumbotron">
 		<div class="container">
@@ -55,6 +58,25 @@
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript">
+  $(function () {
+    var delBtn = $("#delBtn");
+    var delForm = $("#delForm");
+
+    // 삭제버튼 클릭 시..
+    delBtn.on("click", function () {
+      if (confirm("정말로 삭제하시겠습니까??")) {
+        delForm.submit();
+      } else {
+        delForm.reset(); 
+      }
+    });
+    
+    
+  });
+</script>
+
 </html>
 
 

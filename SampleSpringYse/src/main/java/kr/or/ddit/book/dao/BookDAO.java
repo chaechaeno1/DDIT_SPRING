@@ -1,5 +1,6 @@
 package kr.or.ddit.book.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -100,6 +101,31 @@ public class BookDAO {
 		 * 첫번재 파라미터는 쿼리 ID, 두번째 파라미터는 쿼리 파라미터이며 반환값은 영향받은 행 수 이다.
 		 */
 		return sqlSession.update("Book.updateBook", map);
+	}
+
+
+	public int removeBook(Map<String, Object> map) {
+		/*
+		 * sqlSessionTemplate 객체의 delete 메소드는 update 메소드의 사용법이 동일하다.
+		 * 첫번째 파라미터는 쿼리 ID, 두번째 파라미터는 쿼리 파라미터이며 반환값은 영향 받은 행 수 이다.
+		 * 
+		 */
+		
+		return sqlSession.delete("Book.deleteBook", map);
+	}
+
+
+	public List<Map<String, Object>> selectBookList(Map<String, Object> map) {
+		
+		/*
+		 * 쿼리 결과를 목록으로 받기 위해서는 sqlSessionTemplate.selectList를 사용할 수 있다.
+		 * 
+		 * 첫번째 파라미터는 쿼리 ID, 두번째 파라미터는 쿼리 파라미터이다.
+		 * 리턴 타입을 List타입으로 설정한 건, selectList 메소드의 결과가 집합 목록을 반환하기 때문이다.
+		 * 
+		 */
+		
+		return sqlSession.selectList("Book.selectBookList", map);
 	}
 	
 }
