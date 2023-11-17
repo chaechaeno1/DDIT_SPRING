@@ -19,7 +19,7 @@
 					<div class="col-md-2">
 						<label for="title" class="col-form-label">제목</label>
 					</div>
-					<div class="col-md-10"></div>	
+					<div class="col-md-10">${book.TITLE}</div>	<!-- 추가 -->
 				</div>
 			</div>
 			<div class="col-md-12 mb-2">
@@ -27,7 +27,7 @@
 					<div class="col-md-2">
 						<label for="title" class="col-form-label">카테고리</label>
 					</div>
-					<div class="col-md-10"></div>
+					<div class="col-md-10">${book.CATEGORY}</div><!-- 추가 -->
 				</div>
 			</div>
 			<div class="col-md-12 mb-2">
@@ -35,7 +35,7 @@
 					<div class="col-md-2">
 						<label for="title" class="col-form-label">가격</label>
 					</div>
-					<div class="col-md-10"></div>	
+					<div class="col-md-10">${book.PRICE}</div>	<!-- 추가 -->
 				</div>
 			</div>
 			<div class="col-md-12 mb-2">
@@ -43,12 +43,15 @@
 					<div class="col-md-2">
 						<label for="title" class="col-form-label">입력일</label>
 					</div>
-					<div class="col-md-10"></div>	
+					<div class="col-md-10">${book.INSERT_DATE}</div>	<!-- 추가 -->
 				</div>
 			</div>
-			<a href="" class="btn btn-info">수정</a>
-			<a href="" class="btn btn-primary">목록</a>
-			<input type="button" class="btn btn-danger" id="delBtn" value="삭제"/>
+			<a href="/book/update.do?bookId=${bookId}" class="btn btn-info">수정</a> <!-- 추가 -->
+			<a href="/book/list.do" class="btn btn-primary">목록</a> <!-- 추가 -->
+		 	<form method="post" action="/book/delete.do" id="delForm"> <!-- 추가 -->
+				<input type="hidden" name="bookId" value="${bookId }"/> <!-- 아이디 값을 인식해서 해당 데이터 삭제하는 용도, jsp화면에서는 보이지 않음 hidden 설정해서.. -->
+				<input type="button" class="btn btn-danger" id="delBtn" value="삭제"/>
+		 	</form>
 		</div>
 	</div>
 </body>

@@ -57,4 +57,37 @@ public class BookServiceImpl implements IBookService {
 		return null;
 	}
 
+	
+	
+	/**
+	 *<p> 책 상세보기 </p>
+	 *@since SampleSpringYse 1.0
+	 *@author ddit
+	 *@param map 책ID
+	 *@return ID에 해당하는 책 정보
+	 */
+	@Override
+	public Map<String, Object> selectBook(Map<String, Object> map) {
+		//서비스 내 detail함수는 dao를 호출한 결과를 바로 리턴하는 일만 한다.
+		return dao.selectBook(map);
+	}
+
+		
+
+
+	/**
+	 * <p> 책 수정</p>
+	 * @since SampleSpringYse
+	 * @author ddit
+	 * @param map 책ID
+	 * @return 성공1(true), 실패 0(false)
+	 *
+	 */
+	@Override
+	public boolean updateBook(Map<String, Object> map) {
+		//수정의 경우 입력과는 다르게 PK를 가져오거나 하는 절차가 필요 없으므로 행이 정상적으로 영향 받았는지만 검사하면 됨
+		int status = dao.updateBook(map);
+		return status == 1;
+	}
+
 }

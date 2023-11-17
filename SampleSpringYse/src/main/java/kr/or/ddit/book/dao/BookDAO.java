@@ -80,5 +80,26 @@ public class BookDAO {
 		//Book.insert : 네임스페이스명.메서드명
 		return sqlSession.insert("Book.insert", map);
 	}
+
+
+	public Map<String, Object> selectBook(Map<String, Object> map) {
+		/*
+		 * sqlSessionTemplate의 selectOne 메소드는 데이터를 한 개만 가져올 때 사용
+		 * 만약 쿼리 결과 행 수가 0개면 selectOne 메소드는 null 반환,
+		 * 쿼리 결과가 여러개면 TooManyResultException 예외를 던진다.
+		 * 우리가 작성한 쿼리는 조건이 pk이고, pk는 무조건 행이 유일함을 보장하기 때문에 결과는 0개 아니면 1개이다.
+		 * 
+		 */
+		return sqlSession.selectOne("Book.selectBook", map);
+	}
+
+
+	public int updateBook(Map<String, Object> map) {
+		/*
+		 * sqlSessionTemplate 객체의 update 메소드는 insert 메소드와 사용법이 돌일하다.
+		 * 첫번재 파라미터는 쿼리 ID, 두번째 파라미터는 쿼리 파라미터이며 반환값은 영향받은 행 수 이다.
+		 */
+		return sqlSession.update("Book.updateBook", map);
+	}
 	
 }
