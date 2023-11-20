@@ -80,19 +80,22 @@
 			class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 	</div>
 
+
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="">
 					<div class="card-header">
-						<h3 class="card-title"></h3>
+						<h3 class="card-title">${board.boTitle }</h3>
 						<div class="card-tools mt-1">
-							
+							${board.boWriter } ${board.boDate } ${board.boHit}
 						</div>
 					</div>
 					<div class="card-body">
 						<div class="form-group row mt-1">
-							<div class="col-sm-12"></div>
+							<div class="col-sm-12">${board.boContent }</div>
 						</div>
 					</div>
 					<div class="card-footer">

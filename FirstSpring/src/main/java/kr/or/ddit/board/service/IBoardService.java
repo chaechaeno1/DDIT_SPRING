@@ -5,7 +5,9 @@ import kr.or.ddit.vo.BoardVO;
 
 public interface IBoardService {
 
-	ServiceResult insertBoard(BoardVO boardVO);
+	public ServiceResult insertBoard(BoardVO boardVO);
+
+	public BoardVO selectBoard(int boNo);
 	
 	
 

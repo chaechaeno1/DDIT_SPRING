@@ -35,6 +35,7 @@ public class BoardInsertController {
 		
 		
 		//boardVO.getBoTitle().equals("") && boardVO.getBoTitle() == null
+		// ==> lang3 라이브러리 추가 ==> pom.xml에 commons-lang3 dependency 추가하여 사용
 		
 		// 클라이언트에서 넘어온 제목, 내용에 대한 데이터가 공백 또는 null로 들어오진 않는다.
 		// 하지만, 데이터가 혹시나 검증되지 않고 서버로 넘어올 시 에러가 발생할 확률이 가장 높기 때문에
@@ -65,10 +66,22 @@ public class BoardInsertController {
 		}else { //에러가 없는 정상적인 데이터가 입력됨
 			boardVO.setBoWriter("a001"); //로그인 기능이 없으므로 작성자는 미리 세팅해줌
 			
-			//enum을 통해 4가지의 값을 받을 예정
+			//enum을 통해 4가지의 값을 받을 예정(OK, FAILED, EXIST, NOTEXIST)
 			ServiceResult result =  boardService.insertBoard(boardVO);
 			
+			if(result.equals(ServiceResult.OK)) {
+				goPage = "redirect:/board/detail.do?boNo="+boardVO.getBoNo();
+			}else {
+				model.addAttribute("boardVO", boardVO);
+				model.addAttribute("message", "서버에러, 다시 시도해주세요!");
+				goPage ="board/form";
+			}
+			
 		}
+		
+		return goPage;
+		
+		
 		
 	}
 	

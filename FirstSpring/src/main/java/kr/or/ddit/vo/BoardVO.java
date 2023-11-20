@@ -1,5 +1,8 @@
 package kr.or.ddit.vo;
 
+import lombok.Data;
+
+@Data
 public class BoardVO {
 	private int boNo;			//일반게시판 번호
 	private String boTitle;		//일반 게시판 제목
@@ -10,7 +13,7 @@ public class BoardVO {
 	
 	
 	
-	//게터세터
+/*	//게터세터
 	public int getBoNo() {
 		return boNo;
 	}
@@ -48,7 +51,7 @@ public class BoardVO {
 		this.boHit = boHit;
 	}
 
-	
+*/	
 	
 	
 }

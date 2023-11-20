@@ -5,7 +5,7 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/headers.css">
-<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
 <title>일반게시판 등록/수정</title>
 </head>
@@ -16,7 +16,6 @@
 }
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -95,16 +94,16 @@
 							<div class="form-group row">
 								<label class="col-sm-2 control-label" >제목</label>
 								<div class="col-sm-10">
-									<input name="boTitle" type="text" id="boTitle" class="form-control" value="" placeholder="subject">
+									<input name="boTitle" type="text" id="boTitle" class="form-control" value="${boardVO.boTitle }" placeholder="subject">
 								</div>
-								<font color="red" style="font-size: 12px;"></font>
+								<font color="red" style="font-size: 12px;">${errors.boTitle}</font>
 							</div>
 							<div class="form-group row mt-4">
 								<label class="col-sm-2 control-label" >내용</label>
 								<div class="col-sm-10">
-									<textarea name="boContent" id="boContent" cols="50" rows="5" class="form-control" placeholder="content"></textarea>
+									<textarea name="boContent" id="boContent" cols="50" rows="5" class="form-control" placeholder="content">${boardVO.bocontent }</textarea>
 								</div>
-								<font color="red" style="font-size: 12px;"></font>
+								<font color="red" style="font-size: 12px;">${errors.boContent}</font>
 							</div>
 							<div class="form-group row mt-4">
 								<div class="col-sm-offset-2 col-sm-12 ">
@@ -125,19 +124,29 @@
 
 <script type="text/javascript">
 $(function() {
+	CKEDITOR.replace("boContent"); //CKEDITOR를 textarea에 등록
+	
+	
+
 	var addBtn = $("#addBtn");	// 등록버튼
 	var cancelBtn = $("#cancelBtn"); //취소버튼
 	var listBtn = $("#listBtn"); //목록버튼
 	var boardForm = $("#boardForm"); //등록 Form
 	
 	
-	//등록버튼 이벤트
+	//등록버튼 이벤트(addBtn)
 	addBtn.on("click",function(){
 		var title = $("#boTitle").val(); //제목 데이터
-		var content = $("#boContent").val(); //내용 데이터
+		
+		//일반적인 데이터를 가져올 때 사용하는 방법(textarea 사용시)
+		//var content = $("#boContent").val(); //내용 데이터
+		
+		//CKEDITOR를 이용해서 데이터를 가져와야할때 사용하는 방법(editor사용시)
+		var content = CKEDITOR.instances.boContent.getData();	//내용 데이터
+		
 		
 		//제목을 입력하지 않았을 때 발생할 이벤트
-		if(title == null || title = ""){
+		if(title == null || title == ""){
 			alert("제목을 입력해주세요!");
 			$("#boTitle").focus();
 			return false;
@@ -145,25 +154,25 @@ $(function() {
 		}
 		
 		//내용을 입력하지 않았을 때 발생할 이벤트
-		if(content == null || content = ""){
+		if(content == null || content == ""){
 			alert("내용을 입력해주세요!");
 			$("#boContent").focus();
 			return false;
 			
 		}
 		
-		boardform.submit();
+		boardForm.submit();
 		
 		
 	});
 	
-	//취소버튼 이벤트
-	addBtn.on("click",function(){
+	//취소버튼 이벤트(cancelBtn)
+	cancelBtn.on("click",function(){
 		
 	});
 	
-	//목록버튼 이벤트
-	addBtn.on("click",function(){
+	//목록버튼 이벤트(listBtn)
+	listBtn.on("click",function(){
 		location.href = "/board/list.do";
 	});
 	

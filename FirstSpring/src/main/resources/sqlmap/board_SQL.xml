@@ -20,5 +20,25 @@
 		
 		
 	</insert>
+	
+	
+	
+	<update id="incrementHit" parameterType="int">
+		update board
+		set
+			bohit = bohit + 1
+		where bono = #{boNo}		
+	</update>
+	
+
+	<select id="selectBoard" parameterType="int" resultType="boardVO">
+		select
+			bono, botitle, bocontent, bowriter, bodate, bohit
+		from board
+		where bono = #{boNo}
+	</select>
+	
+	
+	
 
 </mapper>

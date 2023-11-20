@@ -28,4 +28,15 @@ public class BoardServiceImpl implements IBoardService {
 		return result;
 	}
 
+
+	@Override
+	public BoardVO selectBoard(int boNo) {
+		
+		
+		//조회수 증가
+		boardDao.incrementHit(boNo);
+		
+		return boardDao.selectBoard(boNo);
+	}
+
 }

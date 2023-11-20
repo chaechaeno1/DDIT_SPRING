@@ -218,6 +218,16 @@
 		
 		
 		
+		<!-- 
+			자바빈 클래스(VO)의 getter/setter 메소드, toString 자동 처리
+			log.info()의 메소드로 sysout 대신 로그를 console에 출력할 수 있다.
+		 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>			
+		</dependency>		
+		
 		
 		
 	

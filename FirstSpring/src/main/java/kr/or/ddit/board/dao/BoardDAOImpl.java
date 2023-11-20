@@ -20,4 +20,15 @@ public class BoardDAOImpl implements IBoardDAO {
 		return sqlSession.insert("Board.insertBoard", boardVO);
 	}
 
+	@Override
+	public void incrementHit(int boNo) {
+		sqlSession.update("Board.incrementHit",boNo);
+		
+	}
+
+	@Override
+	public BoardVO selectBoard(int boNo) {		
+		return sqlSession.selectOne("Board.selectBoard",boNo);
+	}
+
 }
