@@ -97,16 +97,28 @@
 								<th>번호</th>
 								<th>제목</th>
 								<th>작성일</th>
-							</tr>
-							<tr>
-								<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
-							</tr>
+							</tr>							
+							<c:choose>
+								<c:when test="${empty boardList }">
+									<tr>
+										<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
+									</tr>
+								</c:when>
+								
+								<c:otherwise>
+									<c:forEach items="${boardList }" var="board">
+										<tr>
+											<td>${board.boardNo }</td>
+											<td>
+												<a href="/board/detail.do?boardNo=${board.boardNo}">${board.boardTitle}</a>
+											</td>
+											<td>${board.boardDate}</td>
+										</tr>																					
+									</c:forEach>
+										
+								</c:otherwise>
+							</c:choose>
 
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>	
 						</table>
 					</div>
 				</form>

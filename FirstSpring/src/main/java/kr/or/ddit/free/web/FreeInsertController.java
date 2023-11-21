@@ -1,4 +1,4 @@
-package kr.or.ddit.notice.web;
+package kr.or.ddit.free.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,54 +12,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.ServiceResult;
-import kr.or.ddit.notice.service.INoticeService;
-import kr.or.ddit.vo.NoticeVO;
+import kr.or.ddit.free.service.IFreeService;
+import kr.or.ddit.vo.FreeVO;
 
 @Controller
-@RequestMapping("/notice")
-public class NoticeInsertController {
+@RequestMapping("/free")
+public class FreeInsertController {
 	
 	@Inject
-	private INoticeService noticeService;
+	private IFreeService freeService;
 
 	@RequestMapping(value = "/form.do", method=RequestMethod.GET)
-	public String noticeForm() {
-		return "notice/form";
+	public String freeForm() {
+		return "free/form";
 	}
 	
 	@RequestMapping(value="/insert.do", method = RequestMethod.POST)
-	public String noticeInsert(NoticeVO noticeVO, Model model) {
+	public String freeInsert(FreeVO freeVO, Model model) {
 		
 		String goPage = "";
 		Map<String, String> errors = new HashMap<String, String>();
 		
-		if(StringUtils.isBlank(noticeVO.getNoticeTitle())) {
-			errors.put("noticeTitle", "제목을 입력해주세요!");
+		if(StringUtils.isBlank(freeVO.getFreeTitle())) {
+			errors.put("noTitle", "제목을 입력해주세요!");
 		}
 		
-		if(StringUtils.isBlank(noticeVO.getNoticeContent())) {
-			errors.put("noticeContent", "내용을 입력해주세요!");
+		if(StringUtils.isBlank(freeVO.getFreeContent())) {
+			errors.put("noContent", "내용을 입력해주세요!");
 		}
 		
 		if(errors.size() > 0) { //에러가 있는 경우
-			model.addAttribute("noticeVO", noticeVO);
+			model.addAttribute("freeVO", freeVO);
 			model.addAttribute("errors",errors);
 			
-			goPage = "notice/form";
+			goPage = "free/form";
 			
 			
 		}else {//에러가 없는 경우
-			noticeVO.setNoticeWriter("b001");
+			freeVO.setFreeWriter("C001");
 			
 			//enum
-			ServiceResult result = noticeService.insertNotice(noticeVO);
+			ServiceResult result = freeService.insertFree(freeVO);
 			
 			if(result.equals(ServiceResult.OK)) {
-				goPage = "redirect:/notice/detail.do?noticeNo="+noticeVO.getNoticeNo();
+				goPage = "redirect:/free/detail.do?freeNo="+freeVO.getFreeNo();
 			}else {
-				model.addAttribute("notice",noticeVO);
+				model.addAttribute("free",freeVO);
 				model.addAttribute("message","서버 에러, 다시 시도해주세요!");
-				goPage = "notice/form";
+				goPage = "free/form";
 			}
 			
 		}

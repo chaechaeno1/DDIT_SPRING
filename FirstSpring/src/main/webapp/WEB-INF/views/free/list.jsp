@@ -135,11 +135,11 @@
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach items="${freeList }" var="notice">
+											<c:forEach items="${freeList }" var="free">
 												<tr>
 													<td>${free.freeNo }</td>
 													<td>
-														<a href="/notice/detail.do?noticeNo=${free.freeNo}">${free.freeTitle }</a>
+														<a href="/free/detail.do?freeNo=${free.freeNo}">${free.freeTitle }</a>
 													</td>
 													<td>${free.freeWriter }</td>
 													<td>${free.freeDate }</td>

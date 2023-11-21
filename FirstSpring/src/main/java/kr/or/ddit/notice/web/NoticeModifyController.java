@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.ServiceResult;
-import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.notice.service.INoticeService;
-import kr.or.ddit.vo.BoardVO;
 import kr.or.ddit.vo.NoticeVO;
 
 @Controller
@@ -33,7 +31,7 @@ public class NoticeModifyController {
 	public String noticeUpdate(NoticeVO noticeVo, Model model) {
 		String goPage = "";
 		
-		ServiceResult result = noticeService.updateBoard(noticeVo);
+		ServiceResult result = noticeService.updateNotice(noticeVo);
 		if(result.equals(ServiceResult.OK)) { //수정 성공
 			goPage = "redirect:/notice/detail.do?noticeNo="+noticeVo.getNoticeNo();
 		}else { //수정 실패
@@ -50,7 +48,7 @@ public class NoticeModifyController {
 	public String deleteBoard(int noticeNo, Model model) {
 		String goPage = "";
 		
-		ServiceResult result =  noticeService.deleteBoard(noticeNo);
+		ServiceResult result =  noticeService.deleteNotice(noticeNo);
 		if(result.equals(ServiceResult.OK)) { //삭제 성공
 			
 			goPage = "redirect:/notice/list.do";

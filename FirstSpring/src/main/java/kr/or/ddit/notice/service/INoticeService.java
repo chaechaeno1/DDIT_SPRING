@@ -12,9 +12,9 @@ public interface INoticeService {
 
 	public NoticeVO selectNotice(int noticeNo);
 
-	public ServiceResult updateBoard(NoticeVO noticeVo);
+	public ServiceResult updateNotice(NoticeVO noticeVo);
 
-	public ServiceResult deleteBoard(int noticeNo);
+	public ServiceResult deleteNotice(int noticeNo);
 
 	public List<NoticeVO> selectNoticeList_();
 

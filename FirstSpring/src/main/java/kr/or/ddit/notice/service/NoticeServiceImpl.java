@@ -41,7 +41,7 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	@Override
-	public ServiceResult updateBoard(NoticeVO noticeVo) {
+	public ServiceResult updateNotice(NoticeVO noticeVo) {
 		ServiceResult result = null;
 		int status = noticeDao.updateNotice(noticeVo);
 		
@@ -55,7 +55,7 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	@Override
-	public ServiceResult deleteBoard(int noticeNo) {
+	public ServiceResult deleteNotice(int noticeNo) {
 		ServiceResult result = null;
 		int status = noticeDao.deleteNotice(noticeNo);
 		
