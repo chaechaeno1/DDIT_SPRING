@@ -139,7 +139,7 @@
 						</table>
 					</div>
 				</form>
-				<a href="" class="btn btn-outline-primary">&laquo;더보기</a>
+				<a href="/notice/list.do" class="btn btn-outline-primary">&laquo;더보기</a>
 			</div>
 		</div>
 		<br/>
@@ -171,7 +171,7 @@
 						</table>
 					</div>
 				</form>
-				<a href="" class="btn btn-outline-primary">&laquo;더보기</a>
+				<a href="/free/list.do" class="btn btn-outline-primary">&laquo;더보기</a>
 			</div>
 			<div class="col-md-6"></div>
 		</div>

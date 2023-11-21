@@ -5,9 +5,9 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/headers.css">
-<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/ckeditor/ckeditor.js"></script>
-<title>공지사항게시판 등록/수정</title>
+<title>공지사항 등록/수정</title>
 </head>
 <style>
 .bi {
@@ -15,7 +15,16 @@
 	fill: currentColor;
 }
 </style>
+
+
 <body>
+<c:set value="등록" var="name"/> <!-- 처음에는 등록으로 값이 설정되어있음 -->
+<c:if test="${status eq 'u' }">
+	<c:set value="수정" var="name"/> <!-- 그러나 status u 값을 받아오면 수정인걸로.. -->
+</c:if>
+
+
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -75,8 +84,8 @@
 
 	<div class="position-relative overflow-hidden p-3 p-md-8 m-md-8 text-center bg-white">
 		<div class="col-md-8 p-lg-8 mx-auto my-5">
-			<h4 class="display-4 fw-normal">공지사항게시판</h4>
-			<p class="lead fw-normal">공지사항게시판 CRUD를 작성해주세요.</p>
+			<h4 class="display-4 fw-normal">공지사항</h4>
+			<p class="lead fw-normal">공지사항 CRUD를 작성해주세요.</p>
 		</div>
 		<div class="product-device shadow-sm d-none d-md-block"></div>
 		<div
@@ -88,26 +97,35 @@
 			<div class="col-md-12">
 				<div class="">
 					<div class="card-body">
-						<form method="post" action="" id="boardForm" class="form-horizontal">
+						<form method="post" action="/notice/insert.do" id="noticeForm" class="form-horizontal">
+							<c:if test="${status eq 'u' }">
+								<input type="hidden" name="noticeNo" value="${notice.noticeNo }"/>
+							</c:if>
+							
+							
 							<div class="form-group row">
 								<label class="col-sm-2 control-label" >제목</label>
 								<div class="col-sm-10">
-									<input name="boTitle" type="text" class="form-control" value="" placeholder="subject">
+									<input name="noticeTitle" type="text" id="noticeTitle" class="form-control" value="${notice.noticeTitle }" placeholder="subject">
 								</div>
-								<font color="red" style="font-size: 12px;"></font>
+								<font color="red" style="font-size: 12px;">${errors.noticeTitle}</font>
 							</div>
 							<div class="form-group row mt-4">
 								<label class="col-sm-2 control-label" >내용</label>
 								<div class="col-sm-10">
-									<textarea name="boContent" cols="50" rows="5" class="form-control" placeholder="content"></textarea>
+									<textarea name="noticeContent" id="noticeContent" cols="50" rows="5" class="form-control" placeholder="content">${notice.noticeContent }</textarea>
 								</div>
-								<font color="red" style="font-size: 12px;"></font>
+								<font color="red" style="font-size: 12px;">${errors.noticeContent}</font>
 							</div>
 							<div class="form-group row mt-4">
 								<div class="col-sm-offset-2 col-sm-12 ">
-									<input type="button" value="등록" class="btn btn-primary float-right" id="addBtn">
-									<input type="button" value="취소" class="btn btn-danger float-right" id="cancelBtn">
-									<input type="button" value="목록" class="btn btn-success float-right" id="listBtn">
+									<input type="button" value="${name}" class="btn btn-primary float-right" id="addBtn">
+									<c:if test="${status eq 'u' }">
+										<input type="button" value="취소" class="btn btn-danger float-right" id="cancelBtn">										
+									</c:if>
+									<c:if test="${status ne 'u' }">
+										<input type="button" value="목록" class="btn btn-success float-right" id="listBtn">
+									</c:if>
 								</div>
 							</div>
 						</form>
@@ -119,4 +137,76 @@
 	</div>
 </main>
 </body>
+
+<script type="text/javascript">
+$(function() {
+	CKEDITOR.replace("noticeContent"); //CKEDITOR를 textarea에 등록
+	
+	
+
+	var addBtn = $("#addBtn");	
+	var cancelBtn = $("#cancelBtn"); 
+	var listBtn = $("#listBtn");
+	var noticeForm = $("#noticeForm"); 
+	
+	
+	//등록버튼 이벤트(addBtn)
+	addBtn.on("click",function(){
+		var title = $("#noticeTitle").val(); //제목 데이터
+		
+		//일반적인 데이터를 가져올 때 사용하는 방법(textarea 사용시)
+		//var content = $("#boContent").val(); //내용 데이터
+		
+		//CKEDITOR를 이용해서 데이터를 가져와야할때 사용하는 방법(editor사용시)
+		var content = CKEDITOR.instances.noticeContent.getData();	//내용 데이터
+		
+		
+		//제목을 입력하지 않았을 때 발생할 이벤트
+		if(title == null || title == ""){
+			alert("제목을 입력해주세요!");
+			$("#noticeTitle").focus();
+			return false;
+			
+		}
+		
+		//내용을 입력하지 않았을 때 발생할 이벤트
+		if(content == null || content == ""){
+			alert("내용을 입력해주세요!");
+			$("#noticeContent").focus();
+			return false;
+			
+		}
+		
+		
+		//수정일 때, 경로 변경 (기존은 등록 경로로 설정되어있음)
+		if($(this).val() == "수정"){
+			noticeForm.attr("action", "/notice/update.do");			
+		}
+		
+		noticeForm.submit();
+		
+		
+	});
+	
+	//취소버튼 이벤트(cancelBtn)
+	cancelBtn.on("click",function(){
+		location.href = "/notice/detail.do?noticeNo=${notice.noticeNo}";
+		
+	});
+	
+	//목록버튼 이벤트(listBtn)
+	listBtn.on("click",function(){
+		location.href = "/notice/list.do";
+	});
+	
+	
+	
+	
+	
+});
+
+
+</script>
+
+
 </html>

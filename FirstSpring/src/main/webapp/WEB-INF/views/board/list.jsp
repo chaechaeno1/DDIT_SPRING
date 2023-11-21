@@ -4,7 +4,8 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/headers.css">
-<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script> --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <title>메인화면</title>
 </head>
 <style>
@@ -93,9 +94,15 @@
 							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 0건</span>
 						</div>
 					</div>
+					
+					<!-- 검색 진행  -->
 					<div class="card-body mt-3">
 						<div align="right">
 							<form class="input-group input-group-sm" method="post" id="searchForm" style="width: 440px;">
+								
+								<%-- <input type="hidden" name="page" id="page" value="${pagingVO.currentPage }"/> --%>
+								<input type="hidden" name="page" id="page"/>
+								
 								<select class="form-control" name="searchType">
 									<option value="title">제목</option>
 									<option value="writer">작성자</option>
@@ -160,4 +167,26 @@
 	</div>
 </main>
 </body>
+
+
+<script type="text/javascript">
+$(function(){
+	var pagingArea = $("#pagingArea");
+	var searchForm = $("#searchForm");
+	
+	pagingArea.on("click","a",function(event){
+		event.preventDefault();
+		var pageNo = $(this).data("page");
+		searchForm.find("#page").val(pageNo);
+		searchForm.submit();
+		
+			
+	});
+	
+});
+
+
+</script>
+
+
 </html>

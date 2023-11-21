@@ -4,8 +4,9 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/headers.css">
-<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
-<title>공지사항게시판</title>
+<%-- <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script> --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>메인화면</title>
 </head>
 <style>
 .bi {
@@ -73,8 +74,8 @@
 
 	<div class="position-relative overflow-hidden p-3 p-md-8 m-md-8 text-center bg-white">
 		<div class="col-md-8 p-lg-8 mx-auto my-5">
-			<h4 class="display-4 fw-normal">공지사항게시판</h4>
-			<p class="lead fw-normal">공지사항게시판 CRUD를 작성해주세요.</p>
+			<h4 class="display-4 fw-normal">공지사항</h4>
+			<p class="lead fw-normal">공지사항 CRUD를 작성해주세요.</p>
 		</div>
 		<div class="product-device shadow-sm d-none d-md-block"></div>
 		<div
@@ -88,14 +89,20 @@
 					<div class="card-header">
 						<div class="card-tools">
 						</div>
-						<h3 class="card-title">공지사항게시판</h3>
+						<h3 class="card-title">공지사항</h3>
 						<div align="right">
 							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 0건</span>
 						</div>
 					</div>
+					
+					<!-- 검색 진행  -->
 					<div class="card-body mt-3">
 						<div align="right">
 							<form class="input-group input-group-sm" method="post" id="searchForm" style="width: 440px;">
+								
+								<%-- <input type="hidden" name="page" id="page" value="${pagingVO.currentPage }"/> --%>
+								<input type="hidden" name="page" id="page"/>
+								
 								<select class="form-control" name="searchType">
 									<option value="title">제목</option>
 									<option value="writer">작성자</option>
@@ -120,24 +127,39 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<c:set value="${pagingVO.dataList }" var="noticeList"/>
+									<c:choose>
+										<c:when test="${empty noticeList }">
+											<tr>
+												<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${noticeList }" var="notice">
+												<tr>
+													<td>${notice.noticeNo }</td>
+													<td>
+														<a href="/notice/detail.do?noticeNo=${notice.noticeNo}">${notice.noticeTitle }</a>
+													</td>
+													<td>${notice.noticeWriter }</td>
+													<td>${notice.noticeDate }</td>
+													<td>${notice.noticeHit }</td>
+												</tr>																					
+											</c:forEach>
+										
+										</c:otherwise>
+									</c:choose>
+								
 								</tbody>
 							</table>
 						</div>
 						<div align="left">
-							<a href="" class="btn btn-primary">등록</a>
+							<a href="/notice/form.do" class="btn btn-primary">등록</a>
 						</div>
 					</div>
-					<div class="card-footer clearfix mt-4" id="pagingArea"></div>
+					<div class="card-footer clearfix mt-4" id="pagingArea">
+						${pagingVO.pagingHTML }
+					</div>
 				</div>
 			</div>
 			<div class="col-md-12"><br/><br/><br/></div>
@@ -145,4 +167,26 @@
 	</div>
 </main>
 </body>
+
+
+<script type="text/javascript">
+$(function(){
+	var pagingArea = $("#pagingArea");
+	var searchForm = $("#searchForm");
+	
+	pagingArea.on("click","a",function(event){
+		event.preventDefault();
+		var pageNo = $(this).data("page");
+		searchForm.find("#page").val(pageNo);
+		searchForm.submit();
+		
+			
+	});
+	
+});
+
+
+</script>
+
+
 </html>

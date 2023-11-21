@@ -3,8 +3,10 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/headers.css">
-<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
-<title>공지사항게시판 등록/수정</title>
+<%-- <script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script> --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<title>공지사항 등록/수정</title>
 </head>
 <style>
 .bi {
@@ -72,27 +74,30 @@
 
 	<div class="position-relative overflow-hidden p-3 p-md-8 m-md-8 text-center bg-white">
 		<div class="col-md-8 p-lg-8 mx-auto my-5">
-			<h4 class="display-4 fw-normal">공지사항게시판</h4>
-			<p class="lead fw-normal">공지사항게시판 CRUD를 작성해주세요.</p>
+			<h4 class="display-4 fw-normal">공지사항</h4>
+			<p class="lead fw-normal">공지사항 CRUD를 작성해주세요.</p>
 		</div>
 		<div class="product-device shadow-sm d-none d-md-block"></div>
 		<div
 			class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 	</div>
 
+
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="">
 					<div class="card-header">
-						<h3 class="card-title"></h3>
+						<h3 class="card-title">${notice.noticeTitle }</h3>
 						<div class="card-tools mt-1">
-							
+							${notice.noticeWriter } ${notice.noticeDate } ${notice.noticeHit}
 						</div>
 					</div>
 					<div class="card-body">
 						<div class="form-group row mt-1">
-							<div class="col-sm-12"></div>
+							<div class="col-sm-12">${notice.noticeContent }</div>
 						</div>
 					</div>
 					<div class="card-footer">
@@ -100,6 +105,11 @@
 						<button type="button" class="btn btn-info" id="modifyBtn">수정</button>
 						<button type="button" class="btn btn-danger" id="delBtn">삭제</button>
 					</div>
+					
+					<form action="/notice/update.do" method="get" id="noticeForm">
+						<input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
+					</form>
+					
 				</div>
 			</div>
 			<div class="col-md-12"><br/><br/><br/></div>
@@ -107,6 +117,38 @@
 	</div>
 </main>
 </body>
+
+<script type="text/javascript">
+$(function(){
+	var noticeForm = $("#noticeForm");
+	var listBtn = $("#listBtn ");
+	var modifyBtn = $("#modifyBtn");
+	var delBtn = $("#delBtn");
+	
+	//목록 버튼 이벤트
+	listBtn.on("click", function(){
+		location.href = "/notice/list.do"	
+	});	
+	
+	//수정 버튼 이벤트
+	modifyBtn.on("click", function(){
+		noticeForm.submit();
+	});	
+	
+	//삭제 버튼 이벤트
+	delBtn.on("click", function(){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			noticeForm.attr("action", "/notice/delete.do"); //액션 경로 수정
+			noticeForm.attr("method", "post"); //메소드 방식 수정(게시글 번호 노출 방지)
+			noticeForm.submit();
+		}
+						
+	});	
+		
+});
+
+</script>
+
 </html>
 
 

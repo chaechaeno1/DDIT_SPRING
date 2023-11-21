@@ -24,7 +24,7 @@ public class BoardRetrieveController {
 	private IBoardService boardService;
 	
 
-	@RequestMapping(value="/list.do", method=RequestMethod.GET)
+	@RequestMapping(value="/list.do")
 	public String boardList(
 			@RequestParam(name="page", required = false, defaultValue = "1") int currentPage, 
 			//클라이언트에서 보내는 건 page, 서버에서 사용하는건 currentPage, required가 false면 필수값은 아니지만, 디폴드밸류로 인해서 값을 보내지 않으면 무조건 1을 받아옴

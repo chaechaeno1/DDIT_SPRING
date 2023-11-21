@@ -190,6 +190,7 @@ $(function() {
 	
 	//취소버튼 이벤트(cancelBtn)
 	cancelBtn.on("click",function(){
+		location.href = "/board/detail.do?boNo=${board.boNo}";
 		
 	});
 	
