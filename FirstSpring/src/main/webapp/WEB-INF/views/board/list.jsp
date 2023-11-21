@@ -120,6 +120,7 @@
 									</tr>
 								</thead>
 								<tbody>
+									<c:set value="${pagingVO.dataList }" var="boardList"/>
 									<c:choose>
 										<c:when test="${empty boardList }">
 											<tr>
@@ -149,7 +150,9 @@
 							<a href="/board/form.do" class="btn btn-primary">등록</a>
 						</div>
 					</div>
-					<div class="card-footer clearfix mt-4" id="pagingArea"></div>
+					<div class="card-footer clearfix mt-4" id="pagingArea">
+						${pagingVO.pagingHTML }
+					</div>
 				</div>
 			</div>
 			<div class="col-md-12"><br/><br/><br/></div>

@@ -7,6 +7,18 @@
   
 <mapper namespace="Board">
 
+	<sql id="boardSearch">
+		<if test="searchType != null and searchType == 'title'"> <!-- 제목을 가지고 검색함 -->
+			and (botitle like '%' || #{searchWord} || '%')
+		</if>
+		<if test="searchType != null and searchType == 'writer'"> <!-- 작성자를 가지고 검색함 -->
+			and (bowriter like '%' || #{searchWord} || '%')
+		</if>
+			
+	</sql>
+
+
+
 	<insert id ="insertBoard" parameterType="boardVO" useGeneratedKeys="true">
 		<selectKey keyProperty="boNo" resultType="int" order="BEFORE">
 			select seq_board.nextval from dual
@@ -54,12 +66,43 @@
 		where bono = #{boNo}
 	</delete>
 	
-	
-	<select id="selectBoardList" resultType="boardVO">
+	<!-- id에 언더바 추가 -->
+	<select id="selectBoardList_" resultType="boardVO">
 		select
 			bono, botitle, bocontent, bowriter, bodate, bohit
 		from board
 	</select>
+	
+	
+	<select id="selectBoardCount" parameterType="pagingVO" resultType="int">
+		select count(bono) from board
+		where 1=1
+		<include refid="boardSearch"/>
+			
+	</select>
+	
+	
+
+	<select id="selectBoardList" parameterType="pagingVO" resultType="boardVO">
+		select b.*
+		from(	
+			select
+				a.*, row_number() over (order by a.bono desc) rnum
+			from(	
+				select
+					bono, botitle, bocontent, bowriter, bodate, bohit
+				from board
+				where 1=1
+				<include refid="boardSearch"/>
+				order by bono desc
+			) a
+		) b
+		<![CDATA[
+			where b.rnum >= #{startRow} and b.rnum <= #{endRow}
+		]]>
+	</select>
+	
+	
 	
 	
 	

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.PaginationInfoVO;
 
 
 @Repository
@@ -46,9 +47,26 @@ public class BoardDAOImpl implements IBoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectBoardList() {
+	public List<BoardVO> selectBoardList_() {
 		
-		return sqlSession.selectList("Board.selectBoardList");
+		return sqlSession.selectList("Board.selectBoardList_");
+	}
+
+	/*
+	 * @Override public List<BoardVO> selectBoardList_() { // TODO Auto-generated
+	 * method stub return null; }
+	 */
+
+	@Override
+	public int selectBoardCount(PaginationInfoVO<BoardVO> pagingVO) {
+		
+		return  sqlSession.selectOne("Board.selectBoardCount",pagingVO);
+	}
+
+	@Override
+	public List<BoardVO> selectBoardList(PaginationInfoVO<BoardVO> pagingVO) {
+		
+		return sqlSession.selectList("Board.selectBoardList",pagingVO);
 	}
 
 }

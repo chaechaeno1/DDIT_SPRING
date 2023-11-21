@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.ddit.ServiceResult;
 import kr.or.ddit.board.dao.IBoardDAO;
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.PaginationInfoVO;
 
 
 @Service
@@ -74,9 +75,29 @@ public class BoardServiceImpl implements IBoardService {
 
 
 	@Override
-	public List<BoardVO> selectBoardList() {
+	public List<BoardVO> selectBoardList_() {
 		
-		return boardDao.selectBoardList();
+		return boardDao.selectBoardList_();
+	}
+
+
+	/*
+	 * @Override public List<BoardVO> selectBoardList_() { // TODO Auto-generated
+	 * method stub return null; }
+	 */
+
+
+	@Override
+	public int selectBoardCount(PaginationInfoVO<BoardVO> pagingVO) {
+		
+		return boardDao.selectBoardCount(pagingVO);
+	}
+
+
+	@Override
+	public List<BoardVO> selectBoardList(PaginationInfoVO<BoardVO> pagingVO) {
+		
+		return boardDao.selectBoardList(pagingVO);
 	}
 
 }

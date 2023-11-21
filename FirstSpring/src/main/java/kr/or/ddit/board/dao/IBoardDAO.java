@@ -3,6 +3,7 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.PaginationInfoVO;
 
 public interface IBoardDAO {
 
@@ -16,6 +17,10 @@ public interface IBoardDAO {
 
 	public int deleteBoard(int boNo);
 
-	public List<BoardVO> selectBoardList();
+	public List<BoardVO> selectBoardList_();
+
+	public int selectBoardCount(PaginationInfoVO<BoardVO> pagingVO);
+
+	public List<BoardVO> selectBoardList(PaginationInfoVO<BoardVO> pagingVO);
 
 }
