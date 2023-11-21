@@ -100,4 +100,11 @@ public class BoardServiceImpl implements IBoardService {
 		return boardDao.selectBoardList(pagingVO);
 	}
 
+	@Override
+	public int selectBoardCount_() {
+		return boardDao.selectBoardCount_();
+	}
+
+
+
 }

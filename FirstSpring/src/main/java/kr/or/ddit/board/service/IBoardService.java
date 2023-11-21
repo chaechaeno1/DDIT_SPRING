@@ -21,7 +21,8 @@ public interface IBoardService {
 	public int selectBoardCount(PaginationInfoVO<BoardVO> pagingVO);
 
 	public List<BoardVO> selectBoardList(PaginationInfoVO<BoardVO> pagingVO);
-	
+
+	public int selectBoardCount_();
 	
 
 }

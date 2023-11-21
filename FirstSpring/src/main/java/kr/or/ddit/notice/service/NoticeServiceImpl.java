@@ -88,4 +88,9 @@ public class NoticeServiceImpl implements INoticeService {
 		return noticeDao.selectNoticeList(pagingVO);
 	}
 
+	
+	@Override
+	public int selectNoticeCount_() {
+		return noticeDao.selectNoticeCount_();
+	}
 }

@@ -23,4 +23,6 @@ public interface IFreeDAO {
 
 	List<FreeVO> selectFreeList(PaginationInfoVO<FreeVO> pagingVO);
 
+	int selectFreeCount_();
+
 }

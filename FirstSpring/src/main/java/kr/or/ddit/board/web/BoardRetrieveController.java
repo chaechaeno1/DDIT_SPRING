@@ -36,6 +36,9 @@ public class BoardRetrieveController {
 		//List<BoardVO> boardList = boardService.selectBoardList();
 		//model.addAttribute("boardList", boardList);
 		
+		int boardCnt = boardService.selectBoardCount_();
+		model.addAttribute("boardCnt",boardCnt);
+		
 		//방법 2 - PaginationInfoVO 클래스를 활용한 목록 조회 시 사용
 		PaginationInfoVO<BoardVO> pagingVO = new PaginationInfoVO<BoardVO>();
 		

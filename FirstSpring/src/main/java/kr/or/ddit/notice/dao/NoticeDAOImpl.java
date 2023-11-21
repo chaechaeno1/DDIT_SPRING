@@ -63,5 +63,10 @@ public class NoticeDAOImpl implements INoticeDAO {
 		
 		return sqlSession.selectList("Notice.selectNoticeList",pagingVO);
 	}
+	
+	@Override
+	public int selectNoticeCount_() {
+		return sqlSession.selectOne("Notice.selectNoticeCount_");
+	}
 
 }

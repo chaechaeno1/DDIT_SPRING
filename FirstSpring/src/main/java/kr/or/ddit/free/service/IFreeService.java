@@ -23,6 +23,8 @@ public interface IFreeService {
 
 	public List<FreeVO> selectFreeList(PaginationInfoVO<FreeVO> pagingVO);
 
+	public int selectFreeCount_();
+
 
 	
 }

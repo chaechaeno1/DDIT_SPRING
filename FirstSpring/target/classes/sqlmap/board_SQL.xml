@@ -82,6 +82,11 @@
 	</select>
 	
 	
+	<select id="selectBoardCount_" resultType="int">
+		select count(bono) from board
+	</select>
+	
+	
 
 	<select id="selectBoardList" parameterType="pagingVO" resultType="boardVO">
 		select b.*
@@ -102,13 +107,7 @@
 		]]>
 	</select>
 	
-	
-	
-	<select id="selectBoardMain" parameterType="int" resultType="boardVO">
-		select
-			bono, botitle, bodate
-		from board
-	</select>
+
 	
 	
 	

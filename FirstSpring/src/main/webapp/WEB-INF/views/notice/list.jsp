@@ -91,7 +91,7 @@
 						</div>
 						<h3 class="card-title">공지사항</h3>
 						<div align="right">
-							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 0건</span>
+							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${noticeCnt}건</span>
 						</div>
 					</div>
 					

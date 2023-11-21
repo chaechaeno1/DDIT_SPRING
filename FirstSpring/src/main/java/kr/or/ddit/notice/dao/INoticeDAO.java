@@ -23,4 +23,6 @@ public interface INoticeDAO {
 
 	List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO);
 
+	int selectNoticeCount_();
+
 }

@@ -63,5 +63,10 @@ public class FreeDAOImpl implements IFreeDAO {
 		
 		return sqlSession.selectList("Free.selectFreeList",pagingVO);
 	}
+	
+	@Override
+	public int selectFreeCount_() {
+		return sqlSession.selectOne("Free.selectFreeCount_");
+	}
 
 }

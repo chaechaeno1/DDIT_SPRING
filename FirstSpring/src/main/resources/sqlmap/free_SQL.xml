@@ -80,6 +80,10 @@
 			
 	</select>
 	
+	<select id="selectFreeCount_" resultType="int">
+		select count(free_no) from Free
+	</select>
+	
 	
 	<select id="selectFreeList" parameterType="pagingVO" resultType="freeVO">
 		select b.*

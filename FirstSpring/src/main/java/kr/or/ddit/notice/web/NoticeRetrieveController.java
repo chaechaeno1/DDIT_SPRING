@@ -34,6 +34,9 @@ public class NoticeRetrieveController {
 		 * model.addAttribute("noticeList",noticeList);
 		 */
 		
+		int noticeCnt = noticeservice.selectNoticeCount_();
+		model.addAttribute("noticeCnt",noticeCnt);
+		
 		PaginationInfoVO<NoticeVO> pagingVO = new PaginationInfoVO<NoticeVO>();
 		
 		if(StringUtils.isNotBlank(searchWord)) {
