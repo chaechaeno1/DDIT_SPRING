@@ -1,5 +1,7 @@
 package kr.or.ddit.board.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -37,6 +39,44 @@ public class BoardServiceImpl implements IBoardService {
 		boardDao.incrementHit(boNo);
 		
 		return boardDao.selectBoard(boNo);
+	}
+
+
+	@Override
+	public ServiceResult updateBoard(BoardVO boardVO) {
+		ServiceResult result = null;
+		int status = boardDao.updateBoard(boardVO);
+		
+		if(status > 0) { //수정 성공
+			result = ServiceResult.OK;
+		}else { //수정 실패
+			result = ServiceResult.FAILED;
+			
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public ServiceResult deleteBoard(int boNo) {
+		ServiceResult result = null;
+		int status = boardDao.deleteBoard(boNo);
+		
+		if(status > 0) { //수정 성공
+			result = ServiceResult.OK;
+		}else { //수정 실패
+			result = ServiceResult.FAILED;			
+		}
+		
+		return result;
+}
+
+
+	@Override
+	public List<BoardVO> selectBoardList() {
+		
+		return boardDao.selectBoardList();
 	}
 
 }

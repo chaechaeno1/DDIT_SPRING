@@ -1,5 +1,7 @@
 package kr.or.ddit.board.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,9 @@ public class BoardRetrieveController {
 	
 
 	@RequestMapping(value="/list.do", method=RequestMethod.GET)
-	public String boardList() {
+	public String boardList(Model model) {
+		List<BoardVO> boardList = boardService.selectBoardList();
+		model.addAttribute("boardList", boardList);
 		return "board/list";
 	}
 	

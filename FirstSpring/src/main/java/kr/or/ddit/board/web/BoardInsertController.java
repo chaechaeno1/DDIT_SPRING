@@ -58,7 +58,7 @@ public class BoardInsertController {
 			
 			//request.setAttribute("",""); 대신해서 쓸 것
 			//Model은 데이터 전달자 (많이쓰게될 것 !!!!)
-			model.addAttribute("boardVO", boardVO);
+			model.addAttribute("board", boardVO);
 			model.addAttribute("errors", errors);
 			
 			goPage = "board/form";
@@ -72,7 +72,7 @@ public class BoardInsertController {
 			if(result.equals(ServiceResult.OK)) {
 				goPage = "redirect:/board/detail.do?boNo="+boardVO.getBoNo();
 			}else {
-				model.addAttribute("boardVO", boardVO);
+				model.addAttribute("board", boardVO);
 				model.addAttribute("message", "서버에러, 다시 시도해주세요!");
 				goPage ="board/form";
 			}

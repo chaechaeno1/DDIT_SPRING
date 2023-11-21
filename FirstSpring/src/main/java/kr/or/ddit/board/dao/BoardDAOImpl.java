@@ -1,5 +1,7 @@
 package kr.or.ddit.board.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,6 +31,24 @@ public class BoardDAOImpl implements IBoardDAO {
 	@Override
 	public BoardVO selectBoard(int boNo) {		
 		return sqlSession.selectOne("Board.selectBoard",boNo);
+	}
+
+	@Override
+	public int updateBoard(BoardVO boardVO) {
+		
+		return sqlSession.update("Board.updateBoard",boardVO);
+	}
+
+	@Override
+	public int deleteBoard(int boNo) {
+		
+		return sqlSession.update("Board.deleteBoard",boNo);
+	}
+
+	@Override
+	public List<BoardVO> selectBoardList() {
+		
+		return sqlSession.selectList("Board.selectBoardList");
 	}
 
 }

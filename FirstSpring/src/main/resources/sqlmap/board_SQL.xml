@@ -39,6 +39,29 @@
 	</select>
 	
 	
+	<update id="updateBoard" parameterType="boardVO">
+		update board
+		set
+			botitle = #{boTitle},
+			bocontent = #{boContent},
+			bodate = sysdate
+		where bono = #{boNo}
+	</update>
+	
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board
+		where bono = #{boNo}
+	</delete>
+	
+	
+	<select id="selectBoardList" resultType="boardVO">
+		select
+			bono, botitle, bocontent, bowriter, bodate, bohit
+		from board
+	</select>
+	
+	
 	
 
 </mapper>

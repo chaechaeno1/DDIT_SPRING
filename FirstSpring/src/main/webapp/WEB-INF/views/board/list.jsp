@@ -120,16 +120,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+									<c:choose>
+										<c:when test="${empty boardList }">
+											<tr>
+												<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${boardList }" var="board">
+												<tr>
+													<td>${board.boNo }</td>
+													<td>
+														<a href="/board/detail.do?boNo=${board.boNo}">${board.boTitle }</a>
+													</td>
+													<td>${board.boWriter }</td>
+													<td>${board.boDate }</td>
+													<td>${board.boHit }</td>
+												</tr>																					
+											</c:forEach>
+										
+										</c:otherwise>
+									</c:choose>
+								
 								</tbody>
 							</table>
 						</div>
