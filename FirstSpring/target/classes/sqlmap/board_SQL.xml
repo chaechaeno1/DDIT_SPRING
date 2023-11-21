@@ -104,6 +104,14 @@
 	
 	
 	
+	<select id="selectBoardMain" parameterType="int" resultType="boardVO">
+		select
+			bono, botitle, bodate
+		from board
+	</select>
+	
+	
+	
 	
 	
 

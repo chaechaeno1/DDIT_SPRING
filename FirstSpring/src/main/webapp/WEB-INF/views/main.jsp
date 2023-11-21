@@ -99,14 +99,14 @@
 								<th>작성일</th>
 							</tr>							
 							<c:choose>
-								<c:when test="${empty boardList }">
+								<c:when test="${empty boardListMain }">
 									<tr>
 										<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
 									</tr>
 								</c:when>
 								
 								<c:otherwise>
-									<c:forEach items="${boardList }" var="board">
+									<c:forEach items="${boardListMain }" var="board">
 										<tr>
 											<td>${board.boardNo }</td>
 											<td>
