@@ -89,8 +89,5 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	
-	@Override
-	public int selectNoticeCount_() {
-		return noticeDao.selectNoticeCount_();
-	}
+
 }

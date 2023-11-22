@@ -23,5 +23,5 @@ public interface IBoardDAO {
 
 	public List<BoardVO> selectBoardList(PaginationInfoVO<BoardVO> pagingVO);
 
-	public int selectBoardCount_();
+
 }

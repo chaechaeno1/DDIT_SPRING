@@ -91,7 +91,7 @@
 						</div>
 						<h3 class="card-title">자유게시판</h3>
 						<div align="right">
-							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${freeCnt}건</span>
+							<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${pagingVO.totalRecord}건</span>
 						</div>
 					</div>
 					

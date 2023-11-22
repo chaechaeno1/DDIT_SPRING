@@ -88,9 +88,6 @@ public class FreeServiceImpl implements IFreeService {
 		return freeDao.selectFreeList(pagingVO);
 	}
 	
-	@Override
-	public int selectFreeCount_() {
-		return freeDao.selectFreeCount_();
-	}
+
 
 }

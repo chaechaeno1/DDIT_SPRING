@@ -22,7 +22,6 @@ public interface INoticeService {
 
 	public List<NoticeVO> selectNoticeList(PaginationInfoVO<NoticeVO> pagingVO);
 
-	public int selectNoticeCount_();
 
 	
 }

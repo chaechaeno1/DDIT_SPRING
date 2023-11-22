@@ -88,7 +88,7 @@
 					<h5>일반 게시판</h5>
 				</div>
 				<div align="right">
-					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${boardCnt}건</span>
+					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${allCount.BOARDCNT}건</span>
 				</div>
 				<form action="" method="post">
 					<div style="padding-top: 50px">
@@ -102,17 +102,17 @@
 									<c:choose>
 										<c:when test="${empty boardList }">
 											<tr>
-												<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
+												<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach begin="0" end="4" var="i" >
+											<c:forEach items="${boardList }" var="board" >
 												<tr>
-													<td>${boardList[i].boNo }</td>
+													<td>${board.boNo}</td>
 													<td>
-														<a href="/board/detail.do?boNo=${boardList[i].boNo }">${boardList[i].boTitle }</a>
+														<a href="/board/detail.do?boNo=${board.boNo }">${board.boTitle }</a>
 													</td>
-													<td>${boardList[i].boDate }</td>
+													<td>${board.boDate }</td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>
@@ -127,7 +127,7 @@
 					<h5>공지사항</h5>
 				</div>
 				<div align="right">
-					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${noticeCnt}건</span>
+					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${allCount.NOTICECNT}건</span>
 				</div>
 				<form action="" method="post">
 					<div style="padding-top: 50px">
@@ -141,17 +141,17 @@
 									<c:choose>
 										<c:when test="${empty noticeList }">
 											<tr>
-												<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
+												<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach begin="0" end="4" var="i">
+											<c:forEach items="${noticeList }" var="notice" >
 												<tr>
-													<td>${noticeList[i].noticeNo }</td>
+													<td>${notice.noticeNo }</td>
 													<td>
-														<a href="/notice/detail.do?noticeNo=${noticeList[i].noticeNo }">${noticeList[i].noticeTitle }</a>
+														<a href="/notice/detail.do?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a>
 													</td>
-													<td>${noticeList[i].noticeDate }</td>
+													<td>${notice.noticeDate }</td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>
@@ -169,7 +169,7 @@
 					<h5>자유 게시판</h5>
 				</div>
 				<div align="right">
-					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${freeCnt}건</span>
+					<span class="badge bg-dark-subtle border border-dark-subtle text-dark-emphasis rounded-pill">전체 ${allCount.FREECNT}건</span>
 				</div>
 				<form action="" method="post">
 					<div style="padding-top: 50px">
@@ -183,17 +183,17 @@
 									<c:choose>
 										<c:when test="${empty freeList }">
 											<tr>
-												<td colspan="5">조회하신 게시글이 존재하지 않습니다.</td>
+												<td colspan="3">조회하신 게시글이 존재하지 않습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach begin="0" end="4" var="i">
+											<c:forEach items="${freeList }" var="free">
 												<tr>
-													<td>${freeList[i].freeNo }</td>
+													<td>${free.freeNo }</td>
 													<td>
-														<a href="/free/detail.do?freeNo=${freeList[i].freeNo }">${freeList[i].freeTitle }</a>
+														<a href="/free/detail.do?freeNo=${free.freeNo }">${free.freeTitle }</a>
 													</td>
-													<td>${freeList[i].freeDate }</td>
+													<td>${free.freeDate }</td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>

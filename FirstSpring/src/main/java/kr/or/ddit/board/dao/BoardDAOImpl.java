@@ -69,9 +69,5 @@ public class BoardDAOImpl implements IBoardDAO {
 		return sqlSession.selectList("Board.selectBoardList",pagingVO);
 	}
 
-	@Override
-	public int selectBoardCount_() {
-		return sqlSession.selectOne("Board.selectBoardCount_");
-	}
 
 }

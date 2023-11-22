@@ -79,10 +79,7 @@
 		<include refid="noticeSearch"/>
 			
 	</select>
-	
-	<select id="selectNoticeCount_" resultType="int">
-		select count(notice_no) from Notice
-	</select>
+
 	
 	
 	<select id="selectNoticeList" parameterType="pagingVO" resultType="noticeVO">
